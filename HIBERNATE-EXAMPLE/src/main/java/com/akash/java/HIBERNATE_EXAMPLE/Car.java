@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name="car") //to map a class to a table in db
 public class Car {
 	@Id() //to mark a data member as primary key and it is mandatory provide primary key
-	@GeneratedValue(strategy = GenerationType.AUTO) //to auto increment the primary key
+	@GeneratedValue(strategy = GenerationType.SEQUENCE) //to auto increment the primary key
 	@Column(name="carid") //to map a data member to a column in table
 	int carId;
 	@Column(name="modelname")
@@ -24,6 +24,13 @@ public class Car {
 	public Car(int carId, String modelName, float price, String color) {
 		super();
 		this.carId = carId;
+		this.modelName = modelName;
+		this.price = price;
+		this.color = color;
+	}
+	
+	public Car(String modelName, float price, String color) {
+		super();
 		this.modelName = modelName;
 		this.price = price;
 		this.color = color;

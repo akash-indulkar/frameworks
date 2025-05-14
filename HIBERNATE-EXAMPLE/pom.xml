@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <dependencies>
+  <dependencies>  <!--here we add dependencies from maven repository -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -25,6 +25,11 @@
 	    <groupId>org.hibernate.orm</groupId>
 	    <artifactId>hibernate-core</artifactId>
 	    <version>6.6.13.Final</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.mysql</groupId>
+	    <artifactId>mysql-connector-j</artifactId>
+	    <version>8.3.0</version>
 	</dependency>
   </dependencies>
 </project>
