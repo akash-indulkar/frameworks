@@ -1,10 +1,13 @@
 package com.akash.java.HIBERNATE_EXAMPLE;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+//import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity //to let know hibernate that mapping is provided in this class
@@ -14,12 +17,19 @@ public class Car {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE) //to auto increment the primary key
 	@Column(name="carid") //to map a data member to a column in table
 	int carId;
+//	@Embedded To embedd another object in an entity -> Containment->Composition
+	@OneToOne(cascade = CascadeType.ALL) //use cascade to automatically insert an another transient entity before inserting this entity 
+	Engine e;
 	@Column(name="modelname")
 	String modelName;
 	@Column(name="price")
 	float price;
 	@Column(name="color")
 	String color;
+	
+	public Car() {
+		super();
+	}
 	
 	public Car(int carId, String modelName, float price, String color) {
 		super();
@@ -34,6 +44,14 @@ public class Car {
 		this.modelName = modelName;
 		this.price = price;
 		this.color = color;
+	}
+	
+	public Car(String modelName, float price, String color, Engine e) {
+		super();
+		this.modelName = modelName;
+		this.price = price;
+		this.color = color;
+		this.e = e;
 	}
 	
 	@Override

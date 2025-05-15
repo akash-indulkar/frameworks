@@ -12,6 +12,7 @@
  		<property name="show_sql">true</property>
  		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
  		<property name="hibernate.hbm2ddl.auto">update</property>
- 		<mapping class="com.akash.java.HIBERNATE_EXAMPLE.Car"></mapping>
+ 		<mapping class="com.akash.java.HIBERNATE_EXAMPLE.Car"/>
+ 		<mapping class="com.akash.java.HIBERNATE_EXAMPLE.Engine"/>
  	</session-factory>
  </hibernate-configuration>
