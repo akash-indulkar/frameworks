@@ -18,7 +18,7 @@ public class Car {
 	@Column(name="carid") //to map a data member to a column in table
 	int carId;
 //	@Embedded To embedd another object in an entity -> Containment->Composition
-	@OneToOne(cascade = CascadeType.ALL) //use cascade to automatically insert an another transient entity before inserting this entity 
+	@OneToOne(targetEntity = Engine.class, cascade = CascadeType.ALL) //use cascade to automatically insert an another transient entity before inserting this entity 
 	Engine e;
 	@Column(name="modelname")
 	String modelName;
