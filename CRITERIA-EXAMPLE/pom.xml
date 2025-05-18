@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.akash</groupId>
-  <artifactId>EMPLOYEE-MANAGEMENT</artifactId>
+  <artifactId>CRITERIA-EXAMPLE</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>EMPLOYEE-MANAGEMENT</name>
+  <name>CRITERIA-EXAMPLE</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -31,6 +31,5 @@
 	   <artifactId>mysql-connector-j</artifactId>
 	   <version>8.3.0</version>
 	</dependency>
-  
   </dependencies>
 </project>
