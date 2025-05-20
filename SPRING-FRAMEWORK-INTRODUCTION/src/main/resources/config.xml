@@ -22,5 +22,50 @@ First URL: Logical namespace (Spring beans namespace).
 
 Second URL: Physical schema location (the actual XSD file Spring uses). -->
 
-		<bean id="consultant" class="Consultant"></bean>
-		</beans>
+<!-- Dependency Injection means Spring is responsible for creating objects and injecting their dependencies at runtime.
+
+You don't use new to create objects—instead, you define beans, and Spring takes care of wiring them together.
+Types -> 1. Constructor injection
+		 2. Setter injection
+ 
+ Some rules : 1. bean should have unique id(name)
+ 			  2. in constructor injection, order in which the tags defined should match with parameterized constructors arguments order
+ 			  3. classes must have default constructor and setter methods in case of setter injection
+ 			  4. in setter injection name and variable name should be matched
+ 			  5. value is used to provide values for dependencies
+ 			  6. ref is used to inject another bean as containment relationship
+ 
+scope="prototype", a new instance is created every time the bean is requested from the Spring container.
+beans are instantiated when the ApplicationContext is initialized, With lazy-init="true", Bean is not created at startup.
+It is created only when getBean() is called or when another bean depends on it.
+ 
+autowire="byType" tells the container to inject dependencies by matching the data type of the property
+If more than one bean of that type exists, Spring throws an exception (NoUniqueBeanDefinitionException).
+autowire="byName" is one of the ways to automatically inject dependencies into a bean by matching the property name of the bean with the id of another bean in the container.
+P.S. property name is derived from setter method name	
+ -->
+		<bean id="consultant" class="Consultant" autowire="byName" scope="prototype" lazy-init="true"> <!-- autowire="byType" -->
+				<!-- constructor injection 
+			<constructor-arg value="1"/> 
+			<constructor-arg value="Akash Indulkar"/> 
+			<constructor-arg ref="address"/> -->
+				<!-- Setter Injection	-->
+			<property name="name" value="Akash Indulkar" />
+			<property name="cid" value="1" /> 
+	<!--	<property name="adr" ref="address"/>  known as wiring of beans(manually) --> 
+		</bean>
+		<bean id="consultant1" class="Consultant">
+		</bean>
+		<bean id="address" class="Address">
+			<property name="line1" value="Lahotinagar"/>
+			<property name="city" value="Karad"/>
+			<property name="pincode" value="415110"/>
+		</bean>
+		
+		<bean id="adr" class="Address">
+			<property name="line1" value="Malkapur"/>
+			<property name="city" value="Karad"/>
+			<property name="pincode" value="415539"/>
+		</bean>
+		
+</beans>
