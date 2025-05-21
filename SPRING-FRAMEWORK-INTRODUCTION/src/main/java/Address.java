@@ -1,7 +1,13 @@
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Address {
+	@Value("Lahotinagar")
 	String line1;
+	@Value("Karad")
 	String city;
+	@Value("415110")
 	int pincode;
 	
 	public Address() {
@@ -16,8 +22,6 @@ public class Address {
 		this.pincode = pincode;
 		System.out.println("In address parameterized constructor");
 	}
-
-
 
 	public String getLine1() {
 		return line1;
