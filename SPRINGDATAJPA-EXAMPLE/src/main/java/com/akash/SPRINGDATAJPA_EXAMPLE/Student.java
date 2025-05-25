@@ -14,16 +14,19 @@ public class Student {
 	int sid;
 	@Column
 	String name;
+	@Column
+	String password;
 
 	public Student() {
 		super();
 	}
 	
-	public Student(String name) {
+	public Student(String name, String password) {
 		super();
 		this.name = name;
+		this.password = password;
 	}
-	
+
 	public Student(int sid, String name) {
 		super();
 		this.sid = sid;
@@ -46,4 +49,16 @@ public class Student {
 		this.name = name;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [sid=" + sid + ", name=" + name + ", password=" + password + "]";
+	}
 }
