@@ -28,11 +28,23 @@ public class StudentController {
 		return students;
 	}
 	
-	@GetMapping("/students/{id}") 
-	public Student getStudent(@PathVariable int id){ //@PathVariable Extract from URI path segment, Used to extract dynamic values embedded in the URL path.
+	@GetMapping("/students/id/{id}") 
+	public Student getStudentById(@PathVariable int id){ //@PathVariable Extract from URI path segment, Used to extract dynamic values embedded in the URL path.
 		Optional<Student> student = repo.findById(id);
 		if(student.isPresent()) return student.get();
 		else return null;
+	}
+	
+	@GetMapping("/students/name/{name}") 
+	public List<Student> getStudentByName(@PathVariable String name){ //@PathVariable Extract from URI path segment, Used to extract dynamic values embedded in the URL path.
+		List<Student> students = repo.findByNameLike("%" + name + "%");
+		return students;
+	}
+	
+	@GetMapping("students/name/id/{id}")
+	public String getStudentName(@PathVariable int id) {
+		String s = repo.customQuery(id);
+		return s;
 	}
 	
 }
