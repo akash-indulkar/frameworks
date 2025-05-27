@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController //marks the class as a Spring MVC controller, tells Spring to write the return value of methods directly to the HTTP response body, usually in JSON or XML
+//@RestController //marks the class as a Spring MVC controller, tells Spring to write the return value of methods directly to the HTTP response body, usually in JSON or XML
+@Controller //	Used for traditional MVC (UI views). Returns a view name (e.g., Thymeleaf). You must use @ResponseBody manually.
 public class StudentController {
 	@Autowired //must use autowired for automatic dependency injection
 	StudentRepositary repo;
@@ -23,10 +26,17 @@ public class StudentController {
 	}
 	
 	@GetMapping("/students") //used to handle HTTP GET requests
-	public List<Student> getAllStudents(){
+	public String getAllStudents(Model ref){ // the Model is a key component used to pass data from the controller to the view (typically a template like JSP, Thymeleaf, etc.).
 		List<Student> students = repo.findAll();
-		return students;
+		ref.addAttribute("students", students);
+		return "Landing.html";
 	}
+	
+//	@GetMapping("/students") //used to handle HTTP GET requests
+//	public List<Student> getAllStudents(){
+//		List<Student> students = repo.findAll();
+//		return students;
+//	}
 	
 	@GetMapping("/students/id/{id}") 
 	public Student getStudentById(@PathVariable int id){ //@PathVariable Extract from URI path segment, Used to extract dynamic values embedded in the URL path.
