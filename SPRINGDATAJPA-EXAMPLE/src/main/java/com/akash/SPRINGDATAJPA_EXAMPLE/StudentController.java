@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-//@RestController //marks the class as a Spring MVC controller, tells Spring to write the return value of methods directly to the HTTP response body, usually in JSON or XML
-@Controller //	Used for traditional MVC (UI views). Returns a view name (e.g., Thymeleaf). You must use @ResponseBody manually.
+//@Controller //	Used for traditional MVC (UI views). Returns a view name (e.g., Thymeleaf). You must use @ResponseBody manually.
+@RestController //marks the class as a Spring MVC controller, tells Spring to write the return value of methods directly to the HTTP response body, usually in JSON or XML
 public class StudentController {
 	@Autowired //must use autowired for automatic dependency injection
 	StudentRepositary repo;
@@ -26,10 +27,12 @@ public class StudentController {
 	}
 	
 	@GetMapping("/students") //used to handle HTTP GET requests
-	public String getAllStudents(Model ref){ // the Model is a key component used to pass data from the controller to the view (typically a template like JSP, Thymeleaf, etc.).
+//	public String getAllStudents(Model ref){ // the Model is a key component used to pass data from the controller to the view (typically a template like JSP, Thymeleaf, etc.).
+	public List<Student> getAllStudents(){ // the Model is a key component used to pass data from the controller to the view (typically a template like JSP, Thymeleaf, etc.).
 		List<Student> students = repo.findAll();
-		ref.addAttribute("students", students);
-		return "Landing.html";
+//		ref.addAttribute("students", students);
+//		return "Landing.html";
+		return students;
 	}
 	
 //	@GetMapping("/students") //used to handle HTTP GET requests
@@ -51,10 +54,18 @@ public class StudentController {
 		return students;
 	}
 	
-	@GetMapping("students/name/id/{id}")
+	@GetMapping("/students/name/id/{id}")
 	public String getStudentName(@PathVariable int id) {
 		String s = repo.customQuery(id);
 		return s;
+	}
+	
+	@GetMapping("/example")
+	public List<Student> studs(){
+//		return getAllStudents();
+		RestTemplate rt = new RestTemplate(); // if you need to get data from another web service or microservice, you use RestTemplate
+		List<Student> studs = rt.getForEntity("http://localhost:8080/students", List.class).getBody(); 
+		return studs;
 	}
 	
 }
