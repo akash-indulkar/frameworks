@@ -68,4 +68,10 @@ public class StudentController {
 		return studs;
 	}
 	
+	@GetMapping("/error/{eid}")
+	public String getError(@PathVariable int eid) throws Exception {
+		if(eid == 1) throw new Exception();
+		else return "no errors";
+	}
+	
 }
